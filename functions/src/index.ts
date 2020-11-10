@@ -1,8 +1,10 @@
 import * as functions from 'firebase-functions';
-import login from 'benedu-nodejs/dist/auth/getUserToken'
-import _getTaskExamList from 'benedu-nodejs/dist/exam/getTaskExamList'
-import _getCreatedExam from 'benedu-nodejs/dist/exam/getCreatedExam'
-import { setFetch } from 'benedu-nodejs/dist/api'
+import {
+    getTaskExamList as _getTaskExamList,
+    getCreatedExam as _getCreatedExam,
+    login,
+    setFetch
+} from '@rycont/benedu-nodejs'
 import fetch from 'node-fetch'
 
 setFetch(fetch)
