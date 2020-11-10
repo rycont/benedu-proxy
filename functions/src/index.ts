@@ -4,7 +4,7 @@ import {
     getCreatedExam as _getCreatedExam,
     login,
     setFetch
-} from '@rycont/benedu-nodejs'
+} from 'benedu-nodejs'
 import fetch from 'node-fetch'
 
 setFetch(fetch)
@@ -52,6 +52,7 @@ export const auth = functions.https.onRequest(cors(shouldKey(async (request, res
     const username = getKey('username')
     const password = getKey('password')
     if (!(username && password)) return;
+   try {
     response.json({
         token:
             await login({
@@ -59,6 +60,12 @@ export const auth = functions.https.onRequest(cors(shouldKey(async (request, res
                 password
             })
     })
+   } catch(e) {
+       response.status(401).json({
+           error: 401,
+           message: e.message
+       })
+   }
 })));
 
 export const getTaskExamList = functions.https.onRequest(cors(shouldAuth(shouldKey(async (req, res, additional) => {
